@@ -15,12 +15,14 @@ $(document).ready(function() {
   const claimsRef = firebase.database().ref('claims');
 
   // load all thumbnails from db into a dataset array
-  let dataSet = [];
+  var dataSet = [];
+
   claimsRef.on('child_added', function(data) {
     const claimId = data.key;
     const claimObj = data.val();
-    // Push each entry into the dataSet array
-    dataSet.push([
+
+    // Push each entry into a row aray
+    let dataRow = [
       claimObj.LeadNumber,
       claimObj.CustomerName,
       claimObj.Region,
@@ -34,10 +36,12 @@ $(document).ready(function() {
       claimObj.EstimatedInsurableClaim,
       claimObj.LeadInsurer,
       claimObj.PeakPayment,
-    ]);
-    console.log(claimObj.LeadNumber);
-  });
+    ];
+    // push the row into the dataSet
+    dataSet.push(dataRow);
 
+  });
+  console.log(dataSet);
   $('#file-tracker-table').DataTable(
     {
       data: dataSet,
