@@ -1,50 +1,22 @@
 $(document).ready(function() {
 
-  var editor = new $.fn.dataTable.Editor( {} );
-
-  new $.fn.dataTable.Editor( {
-      // ajax:  '/api/staff',
-      table: '#myTable',
-      // fields: [
-      //     { label: 'First name', name: 'first_name' },
-      //     { label: 'Last name',  name: 'last_name'  },
-      //     // etc
-      // ]
-  } );
+  // var editor = new $.fn.dataTable.Editor( {} );
+  //
+  // new $.fn.dataTable.Editor( {
+  //     // ajax:  '/api/staff',
+  //     table: '#myTable',
+  //     // fields: [
+  //     //     { label: 'First name', name: 'first_name' },
+  //     //     { label: 'Last name',  name: 'last_name'  },
+  //     //     // etc
+  //     // ]
+  // } );
 
   const claimsRef = firebase.database().ref('claims');
 
-  // load all thumbnails from db into a dataset array
-  var dataSet = [];
-
-  claimsRef.on('child_added', function(data) {
-    const claimId = data.key;
-    const claimObj = data.val();
-
-    // Push each entry into a row aray
-    let dataRow = [
-      claimObj.LeadNumber,
-      claimObj.CustomerName,
-      claimObj.Region,
-      claimObj.PeakBranch,
-      claimObj.Program,
-      claimObj.ClaimType,
-      claimObj.ContractValue,
-      claimObj.FileOpenDate,
-      claimObj.FileCloseDate,
-      claimObj.EstimatedNonInsurableClaim,
-      claimObj.EstimatedInsurableClaim,
-      claimObj.LeadInsurer,
-      claimObj.PeakPayment,
-    ];
-    // push the row into the dataSet
-    dataSet.push(dataRow);
-
-  });
-  console.log(dataSet);
-  $('#file-tracker-table').DataTable(
+  var dataTable = $('#file-tracker-table').DataTable(
     {
-      data: dataSet,
+      // data: dataSet,
       paging: false,
       dom: 'Blfrtip',
       select: true,
@@ -74,4 +46,30 @@ $(document).ready(function() {
       ]
     }
   );
-})
+
+  claimsRef.on('child_added', function(data) {
+    const claimId = data.key;
+    const claimObj = data.val();
+
+    // Push each entry into a row aray
+    let dataRow = [
+      claimObj.LeadNumber,
+      claimObj.CustomerName,
+      claimObj.Region,
+      claimObj.PeakBranch,
+      claimObj.Program,
+      claimObj.ClaimType,
+      claimObj.ContractValue,
+      claimObj.FileOpenDate,
+      claimObj.FileCloseDate,
+      claimObj.EstimatedNonInsurableClaim,
+      claimObj.EstimatedInsurableClaim,
+      claimObj.PeakInsurerNotified,
+      claimObj.LeadInsurer,
+      claimObj.PeakPayment,
+    ];
+    // push the row into the dataSet
+    dataTable.row.add(dataRow).draw();
+    console.log(dataRow);
+  });
+});
