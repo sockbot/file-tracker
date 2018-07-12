@@ -12,8 +12,35 @@ $(document).ready(function() {
       // ]
   } );
 
+  const claimsRef = firebase.database().ref('claims');
+
+  // load all thumbnails from db into a dataset array
+  let dataSet = [];
+  claimsRef.on('child_added', function(data) {
+    const claimId = data.key;
+    const claimObj = data.val();
+    // Push each entry into the dataSet array
+    dataSet.push([
+      claimObj.LeadNumber,
+      claimObj.CustomerName,
+      claimObj.Region,
+      claimObj.PeakBranch,
+      claimObj.Program,
+      claimObj.ClaimType,
+      claimObj.ContractValue,
+      claimObj.FileOpenDate,
+      claimObj.FileCloseDate,
+      claimObj.EstimatedNonInsurableClaim,
+      claimObj.EstimatedInsurableClaim,
+      claimObj.LeadInsurer,
+      claimObj.PeakPayment,
+    ]);
+    console.log(claimObj.LeadNumber);
+  });
+
   $('#file-tracker-table').DataTable(
     {
+      data: dataSet,
       paging: false,
       dom: 'Blfrtip',
       select: true,
@@ -21,11 +48,26 @@ $(document).ready(function() {
         'copy',
         'excel',
         'pdf',
-        { extend: 'create', editor: editor },
-        { extend: 'edit', editor: editor },
-        { extend: 'remove', editor: editor },
+        // { extend: 'create', editor: editor },
+        // { extend: 'edit', editor: editor },
+        // { extend: 'remove', editor: editor },
+      ],
+      columns: [
+        { title:  "LeadNumber" },
+        { title:  "CustomerName" },
+        { title:  "Region" },
+        { title:  "PeakBranch" },
+        { title:  "Program" },
+        { title:  "ClaimType" },
+        { title:  "ContractValue" },
+        { title:  "FileOpenDate" },
+        { title:  "FileCloseDate" },
+        { title:  "EstimatedNonInsurableClaim" },
+        { title:  "EstimatedInsurableClaim" },
+        { title:  "PeakInsurerNotified" },
+        { title:  "LeadInsurer" },
+        { title:  "PeakPayment" },
       ]
     }
   );
-
 })
