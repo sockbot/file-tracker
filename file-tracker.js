@@ -14,7 +14,7 @@ $(document).ready(function() {
 
   const claimsRef = firebase.database().ref('claims');
 
-  var dataTable = $('#file-tracker-table').DataTable(
+  let dataTable = $('#file-tracker-table').DataTable(
     {
       // data: dataSet,
       paging: false,
@@ -68,6 +68,7 @@ $(document).ready(function() {
       claimObj.LeadInsurer,
       claimObj.PeakPayment,
     ];
+
     // push the row into the dataSet
     dataTable.row.add(dataRow).draw();
     console.log(dataRow);
