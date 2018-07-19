@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <!-- Datatables builder start -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.3.1/jszip-2.5.0/dt-1.10.18/b-1.5.2/b-html5-1.5.2/sl-1.2.6/datatables.min.css" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.3.1/jszip-2.5.0/dt-1.10.18/b-1.5.2/b-html5-1.5.2/sl-1.2.6/datatables.min.js"></script>
+  <!-- Datatables builder end -->
+  <!-- Editor start -->
+  <link rel="stylesheet" type="text/css" href="Editor-1.7.4/css/editor.dataTables.css">
+  <script type="text/javascript" src="Editor-1.7.4/js/dataTables.editor.js"></script>
+  <!-- Editor end -->
+
+  <!-- Firebase start -->
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyB_7X_P4cj3iiF9KV5iY1KxRlqH6viMoJ4",
+      authDomain: "file-tracker-671a9.firebaseapp.com",
+      databaseURL: "https://file-tracker-671a9.firebaseio.com",
+      projectId: "file-tracker-671a9",
+      storageBucket: "file-tracker-671a9.appspot.com",
+      messagingSenderId: "300187348459"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <!-- Firebase end -->
+
+  <script type="text/javascript" src="file-tracker.js"></script>
+</head>
+
+<body>
+  <table id="file-tracker-table" class="display" style="width:100%"></table>
+</body>
+
+</html>
